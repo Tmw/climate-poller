@@ -2,6 +2,7 @@ package reader
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/salex-org/ikea-dirigera-client/pkg/client"
 )
@@ -23,7 +24,7 @@ func All(client client.Client) ([]Reading, error) {
 	}
 
 	sensors := filterReachableSensors(devices)
-	roomNamesByGroupID := roomNameCache(sensors)
+	roomNamesByGroupID := buildRoomNameCache(sensors)
 
 	var readings []Reading
 	processed := make(map[HashKey]struct{})
@@ -56,11 +57,11 @@ func baseID(sensor Device) string {
 	return sensor.ID[0 : len(sensor.ID)-2]
 }
 
-func roomNameCache(sensors []*Device) map[string]string {
+func buildRoomNameCache(sensors []*Device) map[string]string {
 	cache := make(map[string]string)
 	for _, sensor := range sensors {
 		if len(sensor.Room.Name) != 0 {
-			cache[baseID(*sensor)] = sensor.Room.Name
+			cache[baseID(*sensor)] = strings.TrimSpace(sensor.Room.Name)
 		}
 	}
 
