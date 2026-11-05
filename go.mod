@@ -10,6 +10,7 @@ require (
 require (
 	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/hashicorp/mdns v1.0.6 // indirect
+	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/miekg/dns v1.1.55 // indirect
 	golang.org/x/mod v0.26.0 // indirect
 	golang.org/x/net v0.42.0 // indirect

@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"os"
 
+	_ "github.com/joho/godotenv/autoload"
 	"github.com/tmw/pi-climate-monitor/cmd/cli/commands"
 	"github.com/urfave/cli/v3"
 )
@@ -14,14 +14,8 @@ func main() {
 		Name:  "climate-poller",
 		Usage: "CLI tool to poll Dirigera connected smart devices and manage access tokens",
 		Commands: []*cli.Command{
-			{
-				Name: "create-access-token",
-				Action: func(ctx context.Context, c *cli.Command) error {
-					fmt.Println("unimplemented")
-					return nil
-				},
-			},
-
+			commands.Authorize,
+			commands.Exporter,
 			commands.Dump,
 		},
 	}
